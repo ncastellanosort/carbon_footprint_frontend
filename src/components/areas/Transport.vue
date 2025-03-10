@@ -57,9 +57,12 @@
           class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-6 rounded-lg transition duration-300">
           Atrás
         </button>
-        <button class="bg-lime-600 hover:bg-lime-800 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
-          Siguiente
-        </button>
+        <router-link to="/">
+          <button
+            class="bg-lime-600 hover:bg-lime-800 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+            Siguiente
+          </button>
+        </router-link>
       </div>
     </div>
 
