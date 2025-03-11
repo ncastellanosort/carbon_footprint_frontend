@@ -8,6 +8,7 @@ import Food from '@/components/areas/Food.vue';
 import Energy from '@/components/areas/Energy.vue';
 import Waste from '@/components/areas/Waste.vue';
 import Result from '@/components/Result.vue';
+import History from '@/components/History.vue';
 
 const routes = [
   { path: '/', component: Welcome },
@@ -19,6 +20,7 @@ const routes = [
   { path: '/energy', component: Energy },
   { path: '/waste', component: Waste },
   { path: '/result', component: Result },
+  { path: '/history', component: History },
 ];
 
 const router = createRouter({
