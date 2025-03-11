@@ -7,6 +7,6 @@ import Waste from '@/components/areas/Waste.vue'
 
 <template>
   <section class="flex items-center justify-center">
-    <Waste />
+    <Transport />
   </section>
 </template>
