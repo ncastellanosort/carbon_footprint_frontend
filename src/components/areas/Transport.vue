@@ -84,12 +84,16 @@
         </div>
 
         <div class="mt-8 flex justify-between gap-4">
-          <button class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
-            Atrás
-          </button>
-          <button class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-            Siguiente
-          </button>
+          <router-link to="/calculate">
+            <button class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
+              Atrás
+            </button>
+          </router-link>
+          <router-link to="/food">
+            <button class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+              Siguiente
+            </button>
+          </router-link>
         </div>
       </div>
 

@@ -42,10 +42,13 @@
         </div>
 
         <div class="p-8 bg-gray-50">
-          <button @click="volverAlInicio"
-            class="w-full py-4 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors text-lg font-medium">
-            Volver al inicio
-          </button>
+          <router-link to="/">
+
+            <button @click="volverAlInicio"
+              class="w-full py-4 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors text-lg font-medium">
+              Volver al inicio
+            </button>
+          </router-link>
 
           <p class="text-center text-gray-500 text-sm mt-4">
             Calcula tu huella de nuevo en unos meses para ver tu progreso

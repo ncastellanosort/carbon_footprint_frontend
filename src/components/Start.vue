@@ -80,11 +80,12 @@
                 Tus datos son confidenciales y solo se utilizan para calcular tu huella de carbono.
               </p>
             </div>
-
-            <button @click="comenzarPrueba"
-              class="w-full py-4 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-lg font-medium">
-              Comenzar la prueba
-            </button>
+            <router-link to="/transport">
+              <button @click="comenzarPrueba"
+                class="w-full py-4 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-lg font-medium">
+                Comenzar la prueba
+              </button>
+            </router-link>
           </div>
         </div>
 

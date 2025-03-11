@@ -86,12 +86,16 @@
         </div>
 
         <div class="mt-8 flex justify-between gap-4">
-          <button class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
-            Atrás
-          </button>
-          <button class="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors">
-            Siguiente
-          </button>
+          <router-link to="/energy">
+            <button class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
+              Atrás
+            </button>
+          </router-link>
+          <router-link to="/result">
+            <button class="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors">
+              Siguiente
+            </button>
+          </router-link>
         </div>
       </div>
 
