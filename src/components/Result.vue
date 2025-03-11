@@ -1,9 +1,7 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-6">
     <div class="max-w-3xl mx-auto">
-      <!-- Tarjeta principal de resultado -->
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <!-- Encabezado con imagen -->
         <div class="relative h-48 bg-orange-600">
           <img
             src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
@@ -13,28 +11,22 @@
           </div>
         </div>
 
-        <!-- Resultado principal -->
         <div class="p-8 text-center">
           <div class="mb-6">
             <div class="text-7xl font-bold text-orange-600">{{ huellaCarbono.toFixed(1) }}</div>
             <div class="text-xl text-gray-600 mt-2">toneladas de CO₂ al año</div>
           </div>
 
-          <!-- Nivel de impacto -->
           <div class="inline-block px-4 py-2 rounded-full" :class="nivelColor">
             {{ nivelTexto }}
           </div>
 
-          <!-- Interpretación simple -->
           <p class="mt-6 text-gray-700 text-lg">
             {{ interpretacionResultado }}
           </p>
         </div>
-
-        <!-- Separador -->
         <div class="h-1 bg-orange-100"></div>
 
-        <!-- Recomendaciones simplificadas -->
         <div class="p-8">
           <h2 class="text-2xl font-bold text-orange-800 mb-6 text-center">Recomendaciones Clave</h2>
 
@@ -49,7 +41,6 @@
           </div>
         </div>
 
-        <!-- Botón para volver -->
         <div class="p-8 bg-gray-50">
           <button @click="volverAlInicio"
             class="w-full py-4 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors text-lg font-medium">
