@@ -6,7 +6,5 @@ import Waste from '@/components/areas/Waste.vue'
 </script>
 
 <template>
-  <section class="flex items-center justify-center">
-    <Transport />
-  </section>
+  <Energy />
 </template>

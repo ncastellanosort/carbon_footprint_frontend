@@ -1,88 +1,165 @@
-<script setup></script>
-
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-2 h-screen">
-
-    <div class="bg-white px-10 py-10 flex flex-col justify-between">
-      <div>
-        <h2 class="text-5xl font-bold mb-8 text-orange-700">🚮 Residuos</h2>
+  <div class="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-6">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-start">
+      <div class="bg-white rounded-2xl shadow-xl p-8">
+        <div class="flex items-center gap-4 mb-8">
+          <div class="bg-orange-100 p-3 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-orange-600" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4" />
+              <path d="M18 2v4h4" />
+              <path d="M18 6L9 15" />
+              <path d="M21 14v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+            </svg>
+          </div>
+          <h2 class="text-3xl font-bold text-orange-800">Residuos</h2>
+        </div>
 
         <div class="space-y-8">
-          <div>
-            <label for="trash-bags" class="block text-xl font-semibold text-gray-800">
-              ¿Cuántas bolsas de basura completas generas en una semana? (<span id="trash-bags-value">0</span> bolsas)
+          <!-- Bolsas de basura -->
+          <div class="space-y-2">
+            <label class="block text-lg font-medium text-gray-700">
+              ¿Cuántas bolsas de basura completas generas en una semana?
             </label>
-            <input type="range" id="trash-bags" min="0" max="10" value="0" step="1"
-              class="w-full h-2 bg-orange-500 rounded-lg appearance-none cursor-pointer"
-              oninput="document.getElementById('trash-bags-value').textContent = this.value">
+            <div class="relative pt-6">
+              <input type="range" v-model="trashBags" min="0" max="20" step="1"
+                class="w-full h-3 bg-orange-200 rounded-lg appearance-none cursor-pointer" />
+              <div class="absolute top-0 left-0 w-full flex justify-between text-sm text-gray-600">
+                <span>0</span>
+                <span>10</span>
+                <span>20</span>
+              </div>
+            </div>
+            <p class="text-center text-lg font-semibold text-orange-600">{{ trashBags }} bolsas</p>
           </div>
 
-          <div>
-            <label for="organic-waste" class="block text-xl font-semibold text-gray-800">
-              ¿Cuántas bolsas de restos de comida y desechos orgánicos produces a la semana? (<span
-                id="organic-waste-value">0</span> bolsas)
+          <!-- Restos de comida -->
+          <div class="space-y-2">
+            <label class="block text-lg font-medium text-gray-700">
+              ¿Cuántas bolsas de restos de comida y desechos orgánicos produces a la semana?
             </label>
-            <input type="range" id="organic-waste" min="0" max="10" value="0" step="1"
-              class="w-full h-2 bg-orange-500 rounded-lg appearance-none cursor-pointer"
-              oninput="document.getElementById('organic-waste-value').textContent = this.value">
+            <div class="relative pt-6">
+              <input type="range" v-model="foodWaste" min="0" max="20" step="1"
+                class="w-full h-3 bg-orange-200 rounded-lg appearance-none cursor-pointer" />
+              <div class="absolute top-0 left-0 w-full flex justify-between text-sm text-gray-600">
+                <span>0</span>
+                <span>10</span>
+                <span>20</span>
+              </div>
+            </div>
+            <p class="text-center text-lg font-semibold text-orange-600">{{ foodWaste }} bolsas</p>
           </div>
 
-          <div>
-            <label for="plastic-bottles" class="block text-xl font-semibold text-gray-800">
-              ¿Cuántas botellas o envases de plástico tiras cada semana? (<span id="plastic-bottles-value">0</span>
-              botellas)
+          <!-- Botellas de plástico -->
+          <div class="space-y-2">
+            <label class="block text-lg font-medium text-gray-700">
+              ¿Cuántas botellas o envases de plástico tiras cada semana?
             </label>
-            <input type="range" id="plastic-bottles" min="0" max="50" value="0" step="1"
-              class="w-full h-2 bg-orange-500 rounded-lg appearance-none cursor-pointer"
-              oninput="document.getElementById('plastic-bottles-value').textContent = this.value">
+            <div class="relative pt-6">
+              <input type="range" v-model="plasticBottles" min="0" max="50" step="1"
+                class="w-full h-3 bg-orange-200 rounded-lg appearance-none cursor-pointer" />
+              <div class="absolute top-0 left-0 w-full flex justify-between text-sm text-gray-600">
+                <span>0</span>
+                <span>25</span>
+                <span>50</span>
+              </div>
+            </div>
+            <p class="text-center text-lg font-semibold text-orange-600">{{ plasticBottles }} botellas</p>
           </div>
 
-          <div>
-            <label for="paper-waste" class="block text-xl font-semibold text-gray-800">
-              ¿Cuántos paquetes de papel/cartón desechas en una semana? (<span id="paper-waste-value">0</span> paquetes)
+          <!-- Paquetes de papel/cartón -->
+          <div class="space-y-2">
+            <label class="block text-lg font-medium text-gray-700">
+              ¿Cuántos paquetes de papel/cartón desechas en una semana?
             </label>
-            <input type="range" id="paper-waste" min="0" max="10" value="0" step="1"
-              class="w-full h-2 bg-orange-500 rounded-lg appearance-none cursor-pointer"
-              oninput="document.getElementById('paper-waste-value').textContent = this.value">
+            <div class="relative pt-6">
+              <input type="range" v-model="paperPackages" min="0" max="20" step="1"
+                class="w-full h-3 bg-orange-200 rounded-lg appearance-none cursor-pointer" />
+              <div class="absolute top-0 left-0 w-full flex justify-between text-sm text-gray-600">
+                <span>0</span>
+                <span>10</span>
+                <span>20</span>
+              </div>
+            </div>
+            <p class="text-center text-lg font-semibold text-orange-600">{{ paperPackages }} paquetes</p>
           </div>
+        </div>
+
+        <div class="mt-8 flex justify-between gap-4">
+          <button class="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
+            Atrás
+          </button>
+          <button class="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors">
+            Siguiente
+          </button>
         </div>
       </div>
 
-      <div class="flex justify-between mt-8">
-        <button
-          class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-6 rounded-lg transition duration-300">
-          Atrás
-        </button>
-        <button
-          class="bg-orange-600 hover:bg-orange-800 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
-          Siguiente
-        </button>
+      <!-- Ilustración -->
+      <div class="hidden md:block">
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+          <img
+            src="https://img.freepik.com/vector-premium/clasificacion-residuos-basura-vector-conjunto-dibujos-animados-aislado-fondo-blanco_97231-3150.jpg"
+            alt="Ilustración de gestión de residuos" class="w-full h-auto rounded-xl mb-6" />
+          <div class="space-y-4">
+            <h3 class="text-2xl font-bold text-orange-800">Impacto de los Residuos</h3>
+            <p class="text-gray-600">
+              La gestión adecuada de residuos es fundamental para reducir nuestra huella ambiental.
+              Separar correctamente los desechos, reciclar y compostar pueden disminuir significativamente
+              la cantidad de basura que termina en vertederos.
+            </p>
+            <div class="p-4 bg-orange-50 rounded-lg">
+              <p class="text-sm text-orange-800">
+                💡 Tip: Considera utilizar bolsas reutilizables, reducir el consumo de plásticos
+                de un solo uso y compostar los residuos orgánicos para minimizar tu impacto.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="h-full w-full flex items-center justify-center bg-orange-100">
-      <img src="https://scitechdaily.com/images/Trash-Garbage-Waste-scaled.jpg" alt="Residuos y reciclaje"
-        class="w-4/5 rounded-2xl shadow-lg">
-    </div>
-
   </div>
 </template>
 
-<style>
-input[type="range"]::-webkit-slider-thumb {
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  background-color: #ea580c;
-  border-radius: 50%;
-  cursor: pointer;
+<script setup>
+import { ref } from 'vue'
+
+const trashBags = ref(0)
+const foodWaste = ref(0)
+const plasticBottles = ref(0)
+const paperPackages = ref(0)
+</script>
+
+<style scoped>
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 12px;
+  background: #e2e8f0;
+  border-radius: 8px;
+  background-image: linear-gradient(#ea580c, #ea580c);
+  background-repeat: no-repeat;
 }
 
-input[type="range"]::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  background-color: #ea580c;
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 24px;
+  width: 24px;
   border-radius: 50%;
+  background: #ea580c;
   cursor: pointer;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background .3s ease-in-out;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: #c2410c;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
 }
 </style>
+

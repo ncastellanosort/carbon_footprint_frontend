@@ -6,7 +6,7 @@ import Login from '@/components/Login.vue';
 
 const routes = [
   { path: '/', component: Welcome },
-  { path: '/calculadora', component: Calculator },
+  { path: '/calculate', component: Calculator },
   { path: '/register', component: Register },
   { path: '/login', component: Login }
 ];

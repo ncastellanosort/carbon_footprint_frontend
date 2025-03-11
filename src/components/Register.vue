@@ -48,7 +48,9 @@ async function handleSubmit() {
 
 <template>
   <Navbar />
-  <section class="bg-gradient-to-r from-green-100 to-blue-100 min-h-screen flex items-center justify-center p-6">
+
+  <div
+    class="min-h-screen bg-gradient-to-b from-green-50 to-green-100 flex justify-center items-center flex justify-center items-center">
     <div class="bg-white p-8 rounded-lg shadow-md w-1/3">
       <h2 class="text-2xl font-semibold text-green-800 mb-6">Crear cuenta</h2>
 
@@ -96,7 +98,8 @@ async function handleSubmit() {
           <input id="terms" v-model="form.terms" type="checkbox" required
             class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded" />
           <label for="terms" class="text-sm font-normal">
-            Acepto los <a href="/terms" class="text-green-600 hover:text-green-800 underline">términos y condiciones</a>
+            Acepto los <a href="/terms" class="text-green-600 hover:text-green-800 underline">términos y
+              condiciones</a>
           </label>
         </div>
 
@@ -116,5 +119,5 @@ async function handleSubmit() {
 
       </form>
     </div>
-  </section>
+  </div>
 </template>
