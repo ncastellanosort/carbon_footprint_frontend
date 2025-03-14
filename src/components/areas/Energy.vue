@@ -90,7 +90,7 @@
           </router-link>
           <router-link to="/waste">
 
-            <button class="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors">
+             <button @click="nextStep" class="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors">
               Siguiente
             </button>
           </router-link>
@@ -124,12 +124,27 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
+import { useSurveyStore } from "@/Servicio_data/surveyStore";
+import { useRouter } from "vue-router";
 
-const applianceHours = ref(0)
-const lightBulbs = ref(0)
-const gasTanks = ref(0)
-const hvacHours = ref(0)
+const store = useSurveyStore();
+const router = useRouter();
+
+const applianceHours = ref(0);
+const lightBulbs = ref(0);
+const gasTanks = ref(0);
+const hvacHours = ref(0);
+
+const nextStep = () => {
+  store.setEnergyData({
+    applianceHours: applianceHours.value,
+    lightBulbs: lightBulbs.value,
+    gasTanks: gasTanks.value,
+    hvacHours: hvacHours.value,
+  });
+  router.push("/Food");
+};
 </script>
 
 <style scoped>

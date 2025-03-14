@@ -92,7 +92,7 @@
           </router-link>
           <router-link to="/energy">
 
-            <button class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+            <button @click="nextStep" class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
               Siguiente
             </button>
           </router-link>
@@ -126,12 +126,27 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
+import { useSurveyStore } from "@/Servicio_data/surveyStore";
+import { useRouter } from "vue-router";
+
+const store = useSurveyStore();
+const router = useRouter();
 
 const redMeat = ref(0)
 const whiteMeat = ref(0)
 const dairy = ref(0)
 const vegetarian = ref(0)
+
+const nextStep = () => {
+  store.setFoodData({
+    redMeat: redMeat.value,
+    whiteMeat: whiteMeat.value,
+    dairy: dairy.value,
+    vegetarian: vegetarian.value,
+  });
+  router.push("/Transport");
+};
 </script>
 
 <style scoped>

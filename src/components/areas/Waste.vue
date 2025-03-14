@@ -92,8 +92,8 @@
             </button>
           </router-link>
           <router-link to="/result">
-            <button class="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors">
-              Siguiente
+            <button @click="sendData" class="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors">
+              Enviar Todo
             </button>
           </router-link>
         </div>
@@ -126,12 +126,25 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
+import { useSurveyStore } from "@/Servicio_data/surveyStore";
 
-const trashBags = ref(0)
-const foodWaste = ref(0)
-const plasticBottles = ref(0)
-const paperPackages = ref(0)
+const store = useSurveyStore();
+
+const trashBags = ref(0);
+const foodWaste = ref(0);
+const plasticBottles = ref(0);
+const paperPackages = ref(0);
+
+const sendData = () => {
+  store.setWasteData({
+    trashBags: trashBags.value,
+    foodWaste: foodWaste.value,
+    plasticBottles: plasticBottles.value,
+    paperPackages: paperPackages.value
+  });
+  store.sendAllData();
+};
 </script>
 
 <style scoped>

@@ -90,7 +90,7 @@
             </button>
           </router-link>
           <router-link to="/food">
-            <button class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+            <button @click="nextStep" class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
               Siguiente
             </button>
           </router-link>
@@ -124,12 +124,27 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
+import { useSurveyStore } from "@/Servicio_data/surveyStore";
+import { useRouter } from "vue-router";
+
+const store = useSurveyStore();
+const router = useRouter();
 
 const carKm = ref(0)
 const publicKm = ref(0)
 const domesticFlights = ref(0)
 const internationalFlights = ref(0)
+
+const nextStep = () => {
+  store.setTransportData({
+    carKm: carKm.value,
+    publicKm: publicKm.value,
+    domesticFlights: domesticFlights.value,
+    internationalFlights: internationalFlights.value,
+  });
+  router.push("/Waste");
+};
 </script>
 
 <style scoped>
