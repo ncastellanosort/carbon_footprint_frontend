@@ -129,7 +129,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { useSurveyStore } from "/src/services/surveyStore.js";
+import { useSurveyStore } from "@/service/surveyStore";
 import { useRouter } from "vue-router";
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'

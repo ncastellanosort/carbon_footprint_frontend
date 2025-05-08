@@ -1,11 +1,10 @@
 <template>
-  <Navbar />
   <div class="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-6">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-start">
       <div class="bg-white rounded-2xl shadow-xl p-8">
         <div class="flex items-center gap-4 mb-8">
-          <div class="bg-orange-100 p-3 rounded-full">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-orange-600" viewBox="0 0 24 24" fill="none"
+          <div class="bg-blue-100 p-3 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2">
               <path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4" />
               <path d="M18 2v4h4" />
@@ -13,7 +12,7 @@
               <path d="M21 14v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
             </svg>
           </div>
-          <h2 class="text-3xl font-bold text-orange-800">Residuos</h2>
+          <h2 class="text-3xl font-bold text-blue-800">Residuos</h2>
         </div>
 
         <div class="space-y-8">
@@ -31,7 +30,7 @@
                 <span>20</span>
               </div>
             </div>
-            <p class="text-center text-lg font-semibold text-orange-600">{{ trashBags }} bolsas</p>
+            <p class="text-center text-lg font-semibold text-blue-600">{{ trashBags }} bolsas</p>
           </div>
 
           <!-- Restos de comida -->
@@ -48,7 +47,7 @@
                 <span>20</span>
               </div>
             </div>
-            <p class="text-center text-lg font-semibold text-orange-600">{{ foodWaste }} bolsas</p>
+            <p class="text-center text-lg font-semibold text-blue-600">{{ foodWaste }} bolsas</p>
           </div>
 
           <!-- Botellas de plástico -->
@@ -65,7 +64,7 @@
                 <span>50</span>
               </div>
             </div>
-            <p class="text-center text-lg font-semibold text-orange-600">{{ plasticBottles }} botellas</p>
+            <p class="text-center text-lg font-semibold text-blue-600">{{ plasticBottles }} botellas</p>
           </div>
 
           <!-- Paquetes de papel/cartón -->
@@ -82,7 +81,7 @@
                 <span>20</span>
               </div>
             </div>
-            <p class="text-center text-lg font-semibold text-orange-600">{{ paperPackages }} paquetes</p>
+            <p class="text-center text-lg font-semibold text-blue-600">{{ paperPackages }} paquetes</p>
           </div>
         </div>
 
@@ -93,7 +92,7 @@
             </button>
           </router-link>
           <router-link to="/result">
-            <button @click="sendData" class="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors">
+            <button @click="sendData" class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
               Enviar Todo
             </button>
           </router-link>
@@ -107,14 +106,14 @@
             :src="waste_image"
             alt="Ilustración de gestión de residuos" class="w-full h-auto rounded-xl mb-6" />
           <div class="space-y-4">
-            <h3 class="text-2xl font-bold text-orange-800">Impacto de los Residuos</h3>
+            <h3 class="text-2xl font-bold text-blue-800">Impacto de los Residuos</h3>
             <p class="text-gray-600">
               La gestión adecuada de residuos es fundamental para reducir nuestra huella ambiental.
               Separar correctamente los desechos, reciclar y compostar pueden disminuir significativamente
               la cantidad de basura que termina en vertederos.
             </p>
-            <div class="p-4 bg-orange-50 rounded-lg">
-              <p class="text-sm text-orange-800">
+            <div class="p-4 bg-blue-50 rounded-lg">
+              <p class="text-sm text-blue-800">
                 💡 Tip: Considera utilizar bolsas reutilizables, reducir el consumo de plásticos
                 de un solo uso y compostar los residuos orgánicos para minimizar tu impacto.
               </p>
@@ -129,7 +128,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useSurveyStore } from "@/Servicio_data/surveyStore";
+import { useSurveyStore } from "@/service/send_data";
 
 const store = useSurveyStore();
 
@@ -155,7 +154,7 @@ input[type="range"] {
   height: 12px;
   background: #e2e8f0;
   border-radius: 8px;
-  background-image: linear-gradient(#ea580c, #ea580c);
+  background-image: linear-gradient(#009dff, #009dff);
   background-repeat: no-repeat;
 }
 
@@ -164,14 +163,14 @@ input[type="range"]::-webkit-slider-thumb {
   height: 24px;
   width: 24px;
   border-radius: 50%;
-  background: #ea580c;
+  background: #009dff;
   cursor: pointer;
   box-shadow: 0 0 2px 0 #555;
   transition: background .3s ease-in-out;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-  background: #c2410c;
+  background: #1382c7;
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
