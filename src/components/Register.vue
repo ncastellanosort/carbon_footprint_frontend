@@ -2,11 +2,15 @@
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import Navbar from '@/components/Navbar.vue'
+
 import { register } from '../services/AuthService'
 import manageToken from '../services/ManageToken'
 
 
 manageToken.removeToken()
+
+import Footer from '@/components/Footer.vue'
+
 
 const router = useRouter()
 const isLoading = ref(false)
@@ -70,9 +74,16 @@ async function handleSubmit() {
 <template>
   <Navbar />
 
+<<<<<<< HEAD
   <div class="min-h-screen bg-gradient-to-b from-green-50 to-green-100 flex justify-center items-center px-4">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl mx-auto mt-5 mb-5">
       <h2 class="text-2xl font-semibold text-green-800 mb-6 text-center">Crear cuenta</h2>
+=======
+  <div
+    class="min-h-screen bg-gradient-to-b from-green-50 to-green-100 flex justify-center items-center">
+    <div class="bg-white p-8 rounded-lg shadow-md w-1/3">
+      <h2 class="text-2xl font-semibold text-green-800 mb-6">Crear cuenta</h2>
+>>>>>>> 4887b5d96a94bc40155ca2a966ceb8be90f7ff91
 
       <form @submit.prevent="handleSubmit" class="grid grid-cols-2 gap-x-6 gap-y-4">
         <div class="flex flex-col">
@@ -182,6 +193,7 @@ async function handleSubmit() {
       
     </div>
   </div>
+  <Footer />
 </template>
 
 

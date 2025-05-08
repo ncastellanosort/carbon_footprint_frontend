@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-6">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-start">
       <div class="bg-white rounded-2xl shadow-xl p-8">
@@ -101,7 +102,7 @@
       <div class="hidden md:block">
         <div class="bg-white rounded-2xl shadow-xl p-8">
           <img
-            src="https://previews.123rf.com/images/steinar14/steinar141704/steinar14170400059/75847974-conjunto-de-vectores-tipos-de-generaci%C3%B3n-de-energ%C3%ADa-ilustraci%C3%B3n-de-dibujos-animados-colorido.jpg"
+          :src="energy_image"
             alt="Ilustración de energía renovable" class="w-full h-auto rounded-xl mb-6" />
           <div class="space-y-4">
             <h3 class="text-2xl font-bold text-orange-800">Impacto del Consumo Energético</h3>
@@ -121,12 +122,16 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useSurveyStore } from "/src/services/surveyStore.js";
 import { useRouter } from "vue-router";
+import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
+import energy_image from '@/assets/energy_image.jpg'
 
 const store = useSurveyStore();
 const router = useRouter();

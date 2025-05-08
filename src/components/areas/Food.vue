@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="min-h-screen bg-gradient-to-br from-red-50 to-rose-100 p-6">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-start">
       <!-- Formulario de Alimentación -->
@@ -103,7 +104,7 @@
       <div class="hidden md:block">
         <div class="bg-white rounded-2xl shadow-xl p-8">
           <img
-            :src="'https://static.vecteezy.com/system/resources/previews/013/947/655/non_2x/healthy-food-in-hand-symbol-cartoon-illustration-vector.jpg'"
+            :src="food_image"
             alt="Ilustración de impacto alimentario global" class="w-full h-auto rounded-xl mb-6" />
           <div class="space-y-4">
             <h3 class="text-2xl font-bold text-red-800">Impacto de la Alimentación</h3>
@@ -123,12 +124,16 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useSurveyStore } from "/src/services/surveyStore.js";
 import { useRouter } from "vue-router";
+import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
+import food_image from '@/assets/food_image.jpg'
 
 const store = useSurveyStore();
 const router = useRouter();

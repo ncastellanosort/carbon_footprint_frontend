@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-6">
     <div class="max-w-3xl mx-auto">
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -57,10 +58,13 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
 
 // Datos de ejemplo - en una aplicación real estos vendrían de los componentes anteriores
 const huellaCarbono = ref(8.2)

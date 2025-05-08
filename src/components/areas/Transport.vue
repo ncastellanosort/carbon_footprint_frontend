@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="min-h-screen bg-gradient-to-br from-green-50 to-lime-100 p-6">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-start">
       <div class="bg-white rounded-2xl shadow-xl p-8">
@@ -101,7 +102,7 @@
       <div class="hidden md:block">
         <div class="bg-white rounded-2xl shadow-xl p-8">
           <img
-            src="https://static.vecteezy.com/system/resources/previews/009/951/816/non_2x/trucking-transportation-cartoon-illustration-with-cargo-delivery-services-or-cardboard-box-sent-to-the-consumer-in-flat-style-design-vector.jpg"
+            :src="transport_image"
             alt="Ilustración de transporte eco-amigable" class="w-full h-auto rounded-xl mb-6" />
           <div class="space-y-4">
             <h3 class="text-2xl font-bold text-green-800">Impacto del Transporte</h3>
@@ -121,12 +122,16 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useSurveyStore } from "/src/services/surveyStore.js";
 import { useRouter } from "vue-router";
+import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
+import transport_image from '@/assets/transport_image.jpg'
 
 const store = useSurveyStore();
 const router = useRouter();

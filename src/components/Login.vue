@@ -109,4 +109,5 @@ async function handleSubmit() {
       </form>
     </div>
   </div>
+  <Footer />
 </template>

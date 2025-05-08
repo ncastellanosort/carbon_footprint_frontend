@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-green-50 to-lime-100 p-6 flex items-center justify-center">
-    <div class="max-w-5xl mx-auto">
+    <div class="max-w-7xl mx-auto">
       <div class="grid md:grid-cols-2 gap-8 items-center">
         <div class="bg-white rounded-2xl shadow-xl p-8 order-2 md:order-1">
           <div class="space-y-6">
@@ -92,8 +92,8 @@
         <div class="order-1 md:order-2">
           <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
             <img
-              src="https://media.istockphoto.com/id/1441625773/es/vector/icono-vectorial-de-huella-de-co2.jpg?s=612x612&w=0&k=20&c=LrnyT2DMYbRewPTu6w01nEGrlfhE4rivrZB76dGsAKI="
-              alt="Planeta Tierra" class="w-full h-auto object-cover" />
+              :src="carbon_footprint_start"
+              alt="Planeta Tierra" class="p-6 w-full h-full object-cover" />
             <div class="p-6">
               <h3 class="text-xl font-bold text-green-800 mb-2">¿Por qué es importante?</h3>
               <p class="text-gray-600">
@@ -117,6 +117,7 @@
 </template>
 
 <script setup>
+import carbon_footprint_start from '@/assets/carbon_footprint_start.png'
 // Función para comenzar la prueba
 const comenzarPrueba = () => {
   // En una aplicación real, aquí iría la navegación a la primera sección
