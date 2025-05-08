@@ -102,7 +102,7 @@
       <div class="hidden md:block">
         <div class="bg-white rounded-2xl shadow-xl p-8">
           <img
-            src="https://static.vecteezy.com/system/resources/previews/009/951/816/non_2x/trucking-transportation-cartoon-illustration-with-cargo-delivery-services-or-cardboard-box-sent-to-the-consumer-in-flat-style-design-vector.jpg"
+            :src="transport_image"
             alt="Ilustración de transporte eco-amigable" class="w-full h-auto rounded-xl mb-6" />
           <div class="space-y-4">
             <h3 class="text-2xl font-bold text-green-800">Impacto del Transporte</h3>
@@ -131,6 +131,7 @@ import { useSurveyStore } from "@/Servicio_data/surveyStore";
 import { useRouter } from "vue-router";
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
+import transport_image from '@/assets/transport_image.jpg'
 
 const store = useSurveyStore();
 const router = useRouter();
