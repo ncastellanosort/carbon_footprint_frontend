@@ -15,7 +15,7 @@ export const useSurveyStore = defineStore("survey", () => {
 
   const sendAllData = async () => {
     try {
-      const response = await axios.post("http://127.0.0.1:8080/survey", {
+      const response = await axios.post("http://127.0.0.1:8080/data_send", {
         date: new Date().toISOString(),
         energy: energyData.value,
         food: foodData.value,

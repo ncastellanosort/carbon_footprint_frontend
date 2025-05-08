@@ -1,16 +1,16 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-green-50 to-lime-100 p-6">
+  <div class="min-h-screen bg-gradient-to-br from-yellow-50 to-lime-100 p-6">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-start">
       <div class="bg-white rounded-2xl shadow-xl p-8">
         <div class="flex items-center gap-4 mb-8">
-          <div class="bg-green-100 p-3 rounded-full">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" viewBox="0 0 24 24" fill="none"
+          <div class="bg-yellow-100 p-3 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-600" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2">
               <path
                 d="M5 17h14M5 17a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2M5 17l-2 4h18l-2-4M12 4v16" />
             </svg>
           </div>
-          <h2 class="text-3xl font-bold text-green-800">Transporte</h2>
+          <h2 class="text-3xl font-bold text-yellow-400">Transporte</h2>
         </div>
 
         <div class="space-y-8">
@@ -28,7 +28,7 @@
                 <span>1000 km</span>
               </div>
             </div>
-            <p class="text-center text-lg font-semibold text-green-600">{{ carKm }} km</p>
+            <p class="text-center text-lg font-semibold text-yellow-400">{{ carKm }} km</p>
           </div>
 
           <!-- Transporte Público -->
@@ -45,7 +45,7 @@
                 <span>500 km</span>
               </div>
             </div>
-            <p class="text-center text-lg font-semibold text-green-600">{{ publicKm }} km</p>
+            <p class="text-center text-lg font-semibold text-yellow-400">{{ publicKm }} km</p>
           </div>
 
           <!-- Vuelos Nacionales -->
@@ -62,7 +62,7 @@
                 <span>20</span>
               </div>
             </div>
-            <p class="text-center text-lg font-semibold text-green-600">{{ domesticFlights }} vuelos</p>
+            <p class="text-center text-lg font-semibold text-yellow-400">{{ domesticFlights }} vuelos</p>
           </div>
 
           <!-- Vuelos Internacionales -->
@@ -72,14 +72,14 @@
             </label>
             <div class="relative pt-6">
               <input type="range" v-model="internationalFlights" min="0" max="10" step="1"
-                class="w-full h-3 bg-green-200 rounded-lg appearance-none cursor-pointer" />
+                class="w-full h-3 bg-yellow-200 rounded-lg appearance-none cursor-pointer" />
               <div class="absolute top-0 left-0 w-full flex justify-between text-sm text-gray-600">
                 <span>0</span>
                 <span>5</span>
                 <span>10</span>
               </div>
             </div>
-            <p class="text-center text-lg font-semibold text-green-600">{{ internationalFlights }} vuelos</p>
+            <p class="text-center text-lg font-semibold text-yellow-400">{{ internationalFlights }} vuelos</p>
           </div>
         </div>
 
@@ -90,7 +90,7 @@
             </button>
           </router-link>
           <router-link to="/food">
-            <button @click="nextStep" class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+            <button @click="nextStep" class="px-6 py-3 bg-yellow-300 text-white rounded-lg hover:bg-yellow-400 transition-colors">
               Siguiente
             </button>
           </router-link>
@@ -104,14 +104,14 @@
             src="https://static.vecteezy.com/system/resources/previews/009/951/816/non_2x/trucking-transportation-cartoon-illustration-with-cargo-delivery-services-or-cardboard-box-sent-to-the-consumer-in-flat-style-design-vector.jpg"
             alt="Ilustración de transporte eco-amigable" class="w-full h-auto rounded-xl mb-6" />
           <div class="space-y-4">
-            <h3 class="text-2xl font-bold text-green-800">Impacto del Transporte</h3>
+            <h3 class="text-2xl font-bold text-yellow-800">Impacto del Transporte</h3>
             <p class="text-gray-600">
               El transporte es una de las principales fuentes de emisiones de CO2.
               Optar por medios de transporte sostenibles como la bicicleta, el transporte
               público o vehículos eléctricos puede reducir significativamente tu huella de carbono.
             </p>
-            <div class="p-4 bg-green-50 rounded-lg">
-              <p class="text-sm text-green-800">
+            <div class="p-4 bg-yellow-50 rounded-lg">
+              <p class="text-sm text-yellow-800">
                 💡 Tip: Considera compartir coche o trabajar algunos días desde casa
                 para reducir tus emisiones semanales.
               </p>
@@ -125,7 +125,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { useSurveyStore } from "@/Servicio_data/surveyStore";
+import { useSurveyStore } from "@/data_service/send_data";
 import { useRouter } from "vue-router";
 
 const store = useSurveyStore();
@@ -153,7 +153,7 @@ input[type="range"] {
   height: 12px;
   background: #e2e8f0;
   border-radius: 8px;
-  background-image: linear-gradient(#22c55e, #22c55e);
+  background-image: linear-gradient(#ffff00, #ffff00);
   background-repeat: no-repeat;
 }
 
@@ -162,14 +162,14 @@ input[type="range"]::-webkit-slider-thumb {
   height: 24px;
   width: 24px;
   border-radius: 50%;
-  background: #16a34a;
+  background: #ffff00;
   cursor: pointer;
   box-shadow: 0 0 2px 0 #555;
   transition: background .3s ease-in-out;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-  background: #15803d;
+  background: #eaea09;
 }
 
 input[type="range"]::-webkit-slider-runnable-track {

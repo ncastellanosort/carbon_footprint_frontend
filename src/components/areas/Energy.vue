@@ -125,7 +125,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { useSurveyStore } from "@/Servicio_data/surveyStore";
+import { useSurveyStore } from "@/data_service/send_data";
 import { useRouter } from "vue-router";
 
 const store = useSurveyStore();
