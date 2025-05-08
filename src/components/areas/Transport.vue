@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="min-h-screen bg-gradient-to-br from-green-50 to-lime-100 p-6">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-start">
       <div class="bg-white rounded-2xl shadow-xl p-8">
@@ -121,12 +122,15 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useSurveyStore } from "@/Servicio_data/surveyStore";
 import { useRouter } from "vue-router";
+import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
 
 const store = useSurveyStore();
 const router = useRouter();
