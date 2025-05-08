@@ -140,12 +140,21 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import ChartDisplay from './results_display/ChartDisplay.vue'
+import { getfakedata } from './results_display/results_from_calculator.js'
 
-// Datos de ejemplo - en una aplicación real estos vendrían de los componentes anteriores
-const huellaCarbono = ref(8.2)
+const data = ref(null);
+const huellaCarbono = ref(0);
 
-// Nivel de impacto simplificado
+onMounted(async () => {
+  const datos = await getfakedata();
+  if (datos) {
+    data.value = datos;
+    huellaCarbono.value = datos.total;
+  }
+});
+
 const nivelTexto = computed(() => {
   if (huellaCarbono.value < 5) return 'Impacto Bajo'
   if (huellaCarbono.value < 8) return 'Impacto Moderado'
