@@ -2,6 +2,7 @@
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
 
 const router = useRouter()
 const isLoading = ref(false)
@@ -50,7 +51,7 @@ async function handleSubmit() {
   <Navbar />
 
   <div
-    class="min-h-screen bg-gradient-to-b from-green-50 to-green-100 flex justify-center items-center flex justify-center items-center">
+    class="min-h-screen bg-gradient-to-b from-green-50 to-green-100 flex justify-center items-center">
     <div class="bg-white p-8 rounded-lg shadow-md w-1/3">
       <h2 class="text-2xl font-semibold text-green-800 mb-6">Crear cuenta</h2>
 
@@ -120,4 +121,5 @@ async function handleSubmit() {
       </form>
     </div>
   </div>
+  <Footer />
 </template>
