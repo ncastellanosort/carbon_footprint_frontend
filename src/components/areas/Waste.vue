@@ -129,10 +129,14 @@
 
 <script setup>
 import { ref } from 'vue';
+<<<<<<< HEAD
 import { useSurveyStore } from "@/Servicio_data/surveyStore";
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
 import waste_image from '@/assets/waste_image.jpg'
+=======
+import { useSurveyStore } from "/src/services/surveyStore.js";
+>>>>>>> 1ed8440 (AGREGAR logica para manejar autenticacio de usuario, se crea carpeta services)
 
 const store = useSurveyStore();
 
