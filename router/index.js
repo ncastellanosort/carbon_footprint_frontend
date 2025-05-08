@@ -9,6 +9,10 @@ import Energy from '@/components/areas/Energy.vue';
 import Waste from '@/components/areas/Waste.vue';
 import Result from '@/components/Result.vue';
 import History from '@/components/History.vue';
+import WelcomeAuth from '../src/components/authenticated/WelcomeAuth.vue';
+import { authGuard } from '../src/services/AuthGuard';
+
+
 
 const routes = [
   { path: '/', component: Welcome },
@@ -21,6 +25,7 @@ const routes = [
   { path: '/waste', component: Waste },
   { path: '/result', component: Result },
   { path: '/history', component: History },
+  { path: '/welcome-auth', component: WelcomeAuth, beforeEnter: authGuard},
 ];
 
 const router = createRouter({

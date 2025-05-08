@@ -3,10 +3,14 @@ import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
+import { login } from '../services/AuthService'
+import manageToken from '../services/ManageToken'
 
 const router = useRouter()
 const isLoading = ref(false)
-const error = ref('')
+const errorM = ref('')
+
+manageToken.removeToken();
 
 const form = reactive({
   email: '',
@@ -16,20 +20,30 @@ const form = reactive({
 
 async function handleSubmit() {
   isLoading.value = true
-  error.value = ''
+  errorM.value = ''
 
   try {
-    // Aquí integrarías con tu servicio de autenticación
-    // Por ejemplo: const response = await signIn(form.email, form.password)
+    
+    const response = await login({
+      username: form.email,
+      password: form.password
+  })
 
-    // Simulamos un retraso de autenticación
+    const token = response.data.token
+    
+    if(token){
+      manageToken.saveToken(token)
+      router.push('/welcome-auth')
+    }
+
     await new Promise(resolve => setTimeout(resolve, 1000))
 
     // Para fines de demostración, simplemente redirigimos al dashboard
     // En una aplicación real, verificarías la respuesta y manejarías los errores
-    router.push('/dashboard')
-  } catch (err) {
-    error.value = "Credenciales incorrectas. Por favor intenta de nuevo."
+    
+  } catch (error) {
+    console.error(error.response.data)
+    errorM.value = error.response.data.message
   } finally {
     isLoading.value = false
   }
@@ -43,7 +57,7 @@ async function handleSubmit() {
     <div class="bg-white p-8 rounded-lg shadow-md w-1/3">
       <h2 class="text-2xl font-semibold text-green-800 mb-6">Iniciar sesión</h2>
 
-      <div v-if="error"
+      <div v-if="errorM"
         class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md flex items-center gap-2 mb-4">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -51,7 +65,7 @@ async function handleSubmit() {
           <line x1="12" y1="8" x2="12" y2="12"></line>
           <line x1="12" y1="16" x2="12.01" y2="16"></line>
         </svg>
-        <p class="text-sm">{{ error }}</p>
+        <p class="text-sm">{{ errorM }}</p>
       </div>
 
       <form @submit.prevent="handleSubmit" class="space-y-4">
