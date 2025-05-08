@@ -92,7 +92,7 @@
         <div class="order-1 md:order-2">
           <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
             <img
-              src="https://media.istockphoto.com/id/1203960441/photo/carbon-footprint-symbol-barefoot-footprint-made-of-lush-green-grass-with-text-co2.jpg?s=612x612&w=0&k=20&c=WtcbhJkMNbg19Pa6cQ1kxP_4-fqPqQoEZnGna4Pgvjs="
+              :src="carbon_footprint_start"
               alt="Planeta Tierra" class="p-6 w-full h-full object-cover" />
             <div class="p-6">
               <h3 class="text-xl font-bold text-green-800 mb-2">¿Por qué es importante?</h3>
@@ -117,6 +117,7 @@
 </template>
 
 <script setup>
+import carbon_footprint_start from '@/assets/carbon_footprint_start.png'
 // Función para comenzar la prueba
 const comenzarPrueba = () => {
   // En una aplicación real, aquí iría la navegación a la primera sección
