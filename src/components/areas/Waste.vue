@@ -1,5 +1,4 @@
 <template>
-  <Navbar />
   <div class="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-6">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-start">
       <div class="bg-white rounded-2xl shadow-xl p-8">
@@ -104,7 +103,7 @@
       <div class="hidden md:block">
         <div class="bg-white rounded-2xl shadow-xl p-8">
           <img
-            :src="waste_image"
+            src="https://img.freepik.com/vector-premium/clasificacion-residuos-basura-vector-conjunto-dibujos-animados-aislado-fondo-blanco_97231-3150.jpg"
             alt="Ilustración de gestión de residuos" class="w-full h-auto rounded-xl mb-6" />
           <div class="space-y-4">
             <h3 class="text-2xl font-bold text-orange-800">Impacto de los Residuos</h3>
@@ -124,19 +123,14 @@
       </div>
     </div>
   </div>
-  <Footer />
 </template>
 
 <script setup>
 import { ref } from 'vue';
-<<<<<<< HEAD
 import { useSurveyStore } from "@/Servicio_data/surveyStore";
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
 import waste_image from '@/assets/waste_image.jpg'
-=======
-import { useSurveyStore } from "/src/services/surveyStore.js";
->>>>>>> 1ed8440 (AGREGAR logica para manejar autenticacio de usuario, se crea carpeta services)
 
 const store = useSurveyStore();
 

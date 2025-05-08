@@ -2,15 +2,7 @@
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import Navbar from '@/components/Navbar.vue'
-<<<<<<< HEAD
 import Footer from '@/components/Footer.vue'
-=======
-import { register } from '../services/AuthService'
-import manageToken from '../services/ManageToken'
-
-
-manageToken.removeToken()
->>>>>>> 1ed8440 (AGREGAR logica para manejar autenticacio de usuario, se crea carpeta services)
 
 const router = useRouter()
 const isLoading = ref(false)
@@ -74,16 +66,21 @@ async function handleSubmit() {
 <template>
   <Navbar />
 
-<<<<<<< HEAD
   <div
     class="min-h-screen bg-gradient-to-b from-green-50 to-green-100 flex justify-center items-center">
     <div class="bg-white p-8 rounded-lg shadow-md w-1/3">
       <h2 class="text-2xl font-semibold text-green-800 mb-6">Crear cuenta</h2>
-=======
-  <div class="min-h-screen bg-gradient-to-b from-green-50 to-green-100 flex justify-center items-center px-4">
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-2xl mx-auto mt-5 mb-5">
-      <h2 class="text-2xl font-semibold text-green-800 mb-6 text-center">Crear cuenta</h2>
->>>>>>> 1ed8440 (AGREGAR logica para manejar autenticacio de usuario, se crea carpeta services)
+
+      <div v-if="error"
+        class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md flex items-center gap-2 mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <p class="text-sm">{{ error }}</p>
+      </div>
 
       <form @submit.prevent="handleSubmit" class="grid grid-cols-2 gap-x-6 gap-y-4">
         <div class="flex flex-col">
@@ -193,7 +190,6 @@ async function handleSubmit() {
       
     </div>
   </div>
-  <Footer />
 </template>
 
 
