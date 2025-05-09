@@ -2,6 +2,7 @@
 ```
 npm install vue-router
 ```
+```
 npm install vue-chartjs chart.js
 ```
 ```
