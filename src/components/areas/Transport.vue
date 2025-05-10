@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="min-h-screen bg-gradient-to-br from-green-50 to-lime-100 p-6">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-start">
       <div class="bg-white rounded-2xl shadow-xl p-8">

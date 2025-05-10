@@ -1,4 +1,5 @@
 <template>
+  <Navbar />
   <div class="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-6">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-start">
       <div class="bg-white rounded-2xl shadow-xl p-8">
@@ -129,6 +130,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useSurveyStore } from "@/services/surveyStore";
+import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
 
 const store = useSurveyStore();
 
