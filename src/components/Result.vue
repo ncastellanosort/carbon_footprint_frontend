@@ -141,7 +141,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import ChartDisplay from './results_display/ChartDisplay.vue'
+import ChartDisplay from './results_display/chart_display.vue'
 import { getfakedata } from './results_display/results_from_calculator.js'
 
 const data = ref(null);
