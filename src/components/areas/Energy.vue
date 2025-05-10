@@ -1,7 +1,7 @@
 <template>
   <Navbar />
   <div class="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-6">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-start">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
       <div class="bg-white rounded-2xl shadow-xl p-8">
         <div class="flex items-center gap-4 mb-8">
           <div class="bg-orange-100 p-3 rounded-full">
