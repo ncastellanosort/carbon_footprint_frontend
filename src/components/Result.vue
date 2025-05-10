@@ -1,11 +1,12 @@
 <template>
+  <Navbar />
   <div class="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-6">
     <div class="max-w-3xl mx-auto">
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
         <!-- Encabezado con imagen -->
         <div class="relative h-48 bg-green-600">
           <img
-            src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+            :src="result_image"
             alt="Paisaje natural" class="w-full h-full object-cover opacity-60" />
           <div class="absolute inset-0 flex items-center justify-center">
             <h1 class="text-4xl font-bold text-white text-center px-4">Tu Huella de Carbono</h1>
@@ -141,8 +142,11 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import ChartDisplay from './results_display/ChartDisplay.vue'
+import ChartDisplay from './results_display/chart_display.vue'
 import { getfakedata } from './results_display/results_from_calculator.js'
+import result_image from '@/assets/result_image.jpg'
+import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
 
 const data = ref(null);
 const huellaCarbono = ref(0);
