@@ -29,7 +29,7 @@ export const useSurveyStore = defineStore("survey", () => {
         },
         {
           headers: {
-            Authorization: `${token}`,
+            Authorization: `Bearer${token ? ' ' + token : ''}`,
           },
         }
       );
