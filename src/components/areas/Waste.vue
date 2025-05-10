@@ -132,6 +132,7 @@ import { ref } from 'vue';
 import { useSurveyStore } from "@/services/surveyStore";
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
+import waste_image from '@/assets/waste_image.jpg'
 
 const store = useSurveyStore();
 
