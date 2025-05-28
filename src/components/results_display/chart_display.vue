@@ -1,36 +1,47 @@
 <template>
   <div class="px-4 md:px-10">
-    <h2 class="text-xl font-bold text-green-800 mb-4 text-center">Huella de Carbono por Categoría</h2>
-    <div class="w-full max-w-4xl mx-auto">
+    <h2 class="text-2xl font-bold mb-6 text-green-800 text-center">Huella de Carbono por Categoría</h2>
+
+    <!-- Contenedor responsive -->
+    <div class="mx-auto" style="max-width: 600PX; height: 300px;">
       <Bar :data="chartData" :options="chartOptions" />
     </div>
 
+    <!-- Gráficos de pastel -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
       <div v-if="transportData" class="w-full">
         <h3 class="text-lg font-semibold text-green-700 mb-2 text-center">Transporte</h3>
-        <div class="w-full max-w-xs mx-auto">
-          <pie :data="transportData" :options="pieOptions" />
+        <div class="w-full flex justify-center">
+          <div class="w-full max-w-[250px] aspect-square">
+            <Pie :data="transportData" :options="pieOptions" />
+          </div>
         </div>
       </div>
 
       <div v-if="foodData" class="w-full">
         <h3 class="text-lg font-semibold text-green-700 mb-2 text-center">Alimentación</h3>
-        <div class="w-full max-w-xs mx-auto">
-          <Pie :data="foodData" :options="pieOptions" />
+        <div class="w-full flex justify-center">
+          <div class="w-full max-w-[250px] aspect-square">
+            <Pie :data="foodData" :options="pieOptions" />
+          </div>
         </div>
       </div>
 
       <div v-if="energyData" class="w-full">
         <h3 class="text-lg font-semibold text-green-700 mb-2 text-center">Consumo Energético</h3>
-        <div class="w-full max-w-xs mx-auto">
-          <Pie :data="energyData" :options="pieOptions" />
+        <div class="w-full flex justify-center">
+          <div class="w-full max-w-[250px] aspect-square">
+            <Pie :data="energyData" :options="pieOptions" />
+          </div>
         </div>
       </div>
 
       <div v-if="wasteData" class="w-full">
         <h3 class="text-lg font-semibold text-green-700 mb-2 text-center">Residuos</h3>
-        <div class="w-full max-w-xs mx-auto">
-          <Pie :data="wasteData" :options="pieOptions" />
+        <div class="w-full flex justify-center">
+          <div class="w-full max-w-[250px] aspect-square">
+            <Pie :data="wasteData" :options="pieOptions" />
+          </div>
         </div>
       </div>
     </div>
@@ -50,6 +61,7 @@ import {
   CategoryScale,
   LinearScale,
 } from 'chart.js'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 import { getfakedata } from './results_from_calculator.js'
 
 ChartJS.register(
@@ -59,18 +71,21 @@ ChartJS.register(
   ArcElement,
   BarElement,
   CategoryScale,
-  LinearScale
+  LinearScale,
+  ChartDataLabels
 )
 
-const chartData = ref({
-  labels: [],
-  datasets: [],
-})
-
+const chartData = ref({ labels: [], datasets: [] })
 const transportData = ref(null)
 const foodData = ref(null)
 const energyData = ref(null)
 const wasteData = ref(null)
+
+function scaleToHundreds(obj) {
+  return Object.fromEntries(
+    Object.entries(obj).map(([key, val]) => [key, Math.round(val / 10)])
+  )
+}
 
 const chartOptions = {
   responsive: true,
@@ -87,16 +102,35 @@ const chartOptions = {
   scales: {
     y: {
       beginAtZero: true,
+      ticks: {
+        callback: function (value) {
+          return value + ' c'
+        },
+      },
     },
   },
 }
 
 const pieOptions = {
   responsive: true,
-  maintainAspectRatio: false,
+  aspectRatio: 1,
   plugins: {
     legend: {
+      display: true,
       position: 'bottom',
+      align: 'center',
+      labels: {
+        boxWidth: 16,
+        padding: 10,
+        usePointStyle: true,
+        font: {
+          size: 12,
+          family: 'Poppins',
+        },
+      },
+    },
+    datalabels: {
+      display: false,
     },
   },
 }
@@ -104,61 +138,79 @@ const pieOptions = {
 onMounted(async () => {
   const data = await getfakedata()
   if (data) {
+    const transport = scaleToHundreds(data.transport)
+    const food = scaleToHundreds(data.food)
+    const energy = scaleToHundreds(data.energy)
+    const waste = scaleToHundreds(data.waste)
+
     chartData.value = {
       labels: ['Transporte', 'Alimentación', 'Consumo Energético', 'Residuos'],
       datasets: [
         {
-          label: 'Impacto',
+          label: 'Impacto (centenas)',
           backgroundColor: ['#FAFDE0', '#FFEFEF', '#FFF8EB', '#EAF4FF'],
           data: [
-            Object.values(data.transport).reduce((a, b) => a + b, 0),
-            Object.values(data.food).reduce((a, b) => a + b, 0),
-            Object.values(data.energy).reduce((a, b) => a + b, 0),
-            Object.values(data.waste).reduce((a, b) => a + b, 0),
+            Object.values(transport).reduce((a, b) => a + b, 0),
+            Object.values(food).reduce((a, b) => a + b, 0),
+            Object.values(energy).reduce((a, b) => a + b, 0),
+            Object.values(waste).reduce((a, b) => a + b, 0),
           ],
         },
       ],
     }
 
+    const formatLabels = (keys, values) =>
+      keys.map((key, index) => `${key}: ${values[index]}`)
+
+    const transportKeys = ['Auto (km)', 'Transporte público (km)', 'Vuelos nacionales', 'Vuelos internacionales']
+    const foodKeys = ['Carne roja', 'Carne blanca', 'Lácteos', 'Vegetariano']
+    const energyKeys = ['Electrodomésticos', 'Bombillos', 'Tanques de gas', 'Climatización']
+    const wasteKeys = ['Bolsas de basura', 'Desperdicio de comida', 'Botellas plásticas', 'Paquetes de papel']
+
+    const transportValues = Object.values(transport)
+    const foodValues = Object.values(food)
+    const energyValues = Object.values(energy)
+    const wasteValues = Object.values(waste)
+
     transportData.value = {
-      labels: Object.keys(data.transport),
+      labels: formatLabels(transportKeys, transportValues),
       datasets: [
         {
           label: 'Transporte',
-          data: Object.values(data.transport),
+          data: transportValues,
           backgroundColor: ['#FFCDD2', '#F8BBD0', '#E1BEE7', '#D1C4E9'],
         },
       ],
     }
 
     foodData.value = {
-      labels: Object.keys(data.food),
+      labels: formatLabels(foodKeys, foodValues),
       datasets: [
         {
           label: 'Alimentación',
-          data: Object.values(data.food),
+          data: foodValues,
           backgroundColor: ['#C8E6C9', '#DCEDC8', '#F0F4C3', '#FFF9C4'],
         },
       ],
     }
 
     energyData.value = {
-      labels: Object.keys(data.energy),
+      labels: formatLabels(energyKeys, energyValues),
       datasets: [
         {
           label: 'Energía',
-          data: Object.values(data.energy),
+          data: energyValues,
           backgroundColor: ['#B2EBF2', '#B2DFDB', '#C8E6C9', '#D7CCC8'],
         },
       ],
     }
 
     wasteData.value = {
-      labels: Object.keys(data.waste),
+      labels: formatLabels(wasteKeys, wasteValues),
       datasets: [
         {
           label: 'Residuos',
-          data: Object.values(data.waste),
+          data: wasteValues,
           backgroundColor: ['#FFECB3', '#FFE0B2', '#FFCCBC', '#D7CCC8'],
         },
       ],
@@ -168,9 +220,13 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-
 canvas {
-  width: 100% ;
-  height: auto ;
+  width: 100% !important;
+  height: auto !important;
+  max-height: 300px;
+}
+
+.aspect-square {
+  aspect-ratio: 1;
 }
 </style>
