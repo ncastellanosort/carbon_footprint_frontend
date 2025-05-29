@@ -11,6 +11,7 @@ import Result from '@/components/Result.vue';
 import History from '@/components/History.vue';
 import WelcomeAuth from '../src/components/authenticated/WelcomeAuth.vue';
 import { authGuard } from '../src/services/AuthGuard';
+import HistoryDetail from '../src/components/HistoryDetail.vue';
 
 
 
@@ -26,6 +27,7 @@ const routes = [
   { path: '/result', component: Result },
   { path: '/history', component: History },
   { path: '/welcome-auth', component: WelcomeAuth, beforeEnter: authGuard},
+  { path: '/history/:id/detail', component:HistoryDetail}
 ];
 
 const router = createRouter({

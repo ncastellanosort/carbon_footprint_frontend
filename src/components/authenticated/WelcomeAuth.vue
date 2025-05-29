@@ -3,6 +3,9 @@ import Navbar from "./NavbarAuth.vue";
 import Footer from "@/components/Footer.vue";
 import { ref } from "vue";
 import { useMotion } from "@vueuse/motion";
+import ManageToken from "../../services/ManageToken";
+
+console.log("Token desde local storage:" + ManageToken.getToken() )
 </script>
 
 <template>
