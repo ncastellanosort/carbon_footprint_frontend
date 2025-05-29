@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosHistory = axios.create({
-  baseURL: 'http://localhost:8080/history-service',
+  baseURL: 'https://history-service-spring.onrender.com/history-service',
 });
 
 axiosHistory.interceptors.request.use(config => {

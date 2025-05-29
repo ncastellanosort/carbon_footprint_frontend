@@ -58,7 +58,9 @@
           </p>
 
           <div class="border-t pt-3 flex justify-between text-sm text-green-700 font-medium">
-            <a href="#" class="hover:underline">Ver detalles</a>
+            <router-link :to="`/history/${calculo.calculoId}/detail`" class="hover:underline">
+              Ver detalles
+            </router-link>
           </div>
         </div>
       </section>
