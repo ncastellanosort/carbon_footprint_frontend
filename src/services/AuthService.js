@@ -4,7 +4,7 @@ import { errorMessages } from "vue/compiler-sfc";
 import { ref } from "vue";
 
 
-const URL_SERVICE= "https://auth-service-jwt-spring-production.up.railway.app/auth-service"
+const URL_SERVICE= "https://auth-service-jwt-spring.onrender.com/auth-service"
 
 const errorMessage= ref("");
 

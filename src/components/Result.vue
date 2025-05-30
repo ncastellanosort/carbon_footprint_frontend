@@ -5,15 +5,24 @@
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
 
         <!-- cargando  -->
-        <div v-if="!data" class="p-12 text-center text-gray-600 text-xl">
+        <div v-if="estaCargando" class="p-12 text-center text-gray-600 text-xl">
           Cargando...
+          <p v-if="huboError" class="mt-4 text-green-600 text-base">
+            Por favor, espera un momento mientras procesamos la información. Si el proceso no continúa, vuelve a
+            realizar la encuesta.
+          </p>
+          <router-link to="/">
+            <button class="mt-6 px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors">
+              Ir a la encuesta
+            </button>
+          </router-link>
         </div>
 
         <div v-else>
           <!-- Contenido exportable -->
           <div id="contenido-exportable">
             <!-- Encabezado con imagen -->
-            <div class="relative h-48 bg-green-600">
+            <div class="relative h-35 bg-green-600">
               <img :src="result_image" alt="Paisaje natural" class="w-full h-full object-cover opacity-60" />
               <div class="absolute inset-0 flex items-center justify-center">
                 <h1 class="text-4xl font-bold text-white text-center px-4">
@@ -102,7 +111,6 @@
               </div>
             </div>
 
-            <!-- Línea divisoria -->
             <div class="h-1 bg-green-100"></div>
 
             <!-- Recomendaciones simples -->
@@ -164,28 +172,52 @@
   <Footer />
 </template>
 
-
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { parse, formatRgb } from 'culori'
 import html2pdf from 'html2pdf.js'
-import { getfakedata } from './results_display/results_from_calculator.js'
 import ChartDisplay from './results_display/chart_display.vue'
 import result_image from '@/assets/result_image.jpg'
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
-import { obtenerRecomendaciones } from '../services/recomendations.js'
+import { useSurveyStore } from '../services/surveyStore.js'
 
 const data = ref(null)
 const huellaCarbono = ref(0)
+const recomendacionesSimples = ref([])
+const recomendacionGlobal = ref('')
+const huboError = ref(false)
+const surveyStore = useSurveyStore()
 
-onMounted(async () => {
-  const datos = await getfakedata()
-  if (datos) {
-    data.value = datos
-    huellaCarbono.value = datos.total
-  }
-})
+const estaCargando = computed(() => !data.value || Object.keys(data.value).length === 0)
+
+watch(
+  () => surveyStore.forwardedResponse,
+  (nuevo) => {
+    if (nuevo && Object.keys(nuevo).length > 0) {
+      huboError.value = false
+      data.value = nuevo
+      huellaCarbono.value = nuevo.result || 0
+      recomendacionGlobal.value = nuevo.global_recommendation?.suggestion || ''
+
+      const todas = []
+      if (nuevo.category_recommendations) {
+        for (const categoria in nuevo.category_recommendations) {
+          const sugerencias = nuevo.category_recommendations[categoria]
+          sugerencias.forEach(item => todas.push(item.suggestion))
+        }
+      }
+      recomendacionesSimples.value = todas
+    } else {
+      huboError.value = true
+      data.value = null
+      huellaCarbono.value = 0
+      recomendacionesSimples.value = []
+      recomendacionGlobal.value = ''
+    }
+  },
+  { immediate: true }
+)
 
 const nivelTexto = computed(() => {
   if (huellaCarbono.value < 5) return 'Impacto Bajo'
@@ -208,39 +240,11 @@ const interpretacionResultado = computed(() => {
   return 'Impacto muy alto. Necesitas hacer cambios importantes.'
 })
 
-// Recomendaciones
-const recomendacionesSimples = ref([])
-const recomendacionGlobal = ref('')
-
-onMounted(async () => {
-  const data = await obtenerRecomendaciones()
-  if (!data) return
-
-  const todas = []
-
-  if (data.global_recommendation?.suggestion) {
-    recomendacionGlobal.value = data.global_recommendation.suggestion
-  }
-
-  if (data.category_recommendations) {
-    for (const categoria in data.category_recommendations) {
-      const sugerencias = data.category_recommendations[categoria]
-      sugerencias.forEach(item => {
-        todas.push(item.suggestion)
-      })
-    }
-  }
-
-  recomendacionesSimples.value = todas
-})
-
-//volver al inicio
 const volverAlInicio = () => {
-  console.log('Volviendo al inicio...')
+  localStorage.removeItem("forwarded_response")
+  surveyStore.setForwardedResponse(null)
 }
 
-
-//trasnformar colores RGB para exportar a PDF
 const transformarColoresRGB = () => {
   const elementos = document.querySelectorAll('*')
   const propiedades = ['color', 'backgroundColor', 'borderColor']
@@ -256,27 +260,18 @@ const transformarColoresRGB = () => {
             const rgb = formatRgb(parsed)
             el.style[prop] = rgb
           }
-        } catch (e) {
-          console.warn('Error al parsear color:', e)
-        }
+        } catch (e) { }
       }
     })
   })
 
-  //manejo de exportación a PDF
-  const contenido = document.getElementById('contenido-exportable')
-  if (contenido) {
-    const opciones = {
-      margin: [0.2, 0.2, 0.2, 0.2],
-      filename: 'huella-carbono.pdf',
-      image: { type: 'jpeg', quality: 2 },
-      html2canvas: { scale: 3, useCORS: true },
-      jsPDF: { unit: 'in', format: 'a2', orientation: 'portrait' }
-    }
-
-    html2pdf().set(opciones).from(contenido).save()
-  } else {
-    console.error('No se encontró el contenido para exportar')
+  const element = document.getElementById('contenido-exportable')
+  const options = {
+    filename: 'Reporte-Huella.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'mm', format: 'a2', orientation: 'portrait' },
   }
+  html2pdf().set(options).from(element).save()
 }
 </script>

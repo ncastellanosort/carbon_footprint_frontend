@@ -93,7 +93,8 @@
           </router-link>
           <router-link to="/energy">
 
-            <button @click="nextStep" class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
+            <button @click="nextStep"
+              class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors">
               Siguiente
             </button>
           </router-link>
@@ -103,9 +104,8 @@
       <!-- Ilustración -->
       <div class="hidden md:block">
         <div class="bg-white rounded-2xl shadow-xl p-8">
-          <img
-            :src="food_image"
-            alt="Ilustración de impacto alimentario global" class="w-full h-auto rounded-xl mb-6" />
+          <img :src="food_image" alt="Ilustración de impacto alimentario global"
+            class="w-full h-auto rounded-xl mb-6" />
           <div class="space-y-4">
             <h3 class="text-2xl font-bold text-red-800">Impacto de la Alimentación</h3>
             <p class="text-gray-600">
@@ -145,10 +145,10 @@ const vegetarian = ref(0)
 
 const nextStep = () => {
   store.setFoodData({
-    redMeat: redMeat.value,
-    whiteMeat: whiteMeat.value,
     dairy: dairy.value,
+    redMeat: redMeat.value,
     vegetarian: vegetarian.value,
+    whiteMeat: whiteMeat.value,
   });
   router.push("/Transport");
 };
