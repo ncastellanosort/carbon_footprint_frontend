@@ -91,7 +91,8 @@
           </router-link>
           <router-link to="/waste">
 
-             <button @click="nextStep" class="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors">
+            <button @click="nextStep"
+              class="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors">
               Siguiente
             </button>
           </router-link>
@@ -101,9 +102,7 @@
       <!-- Ilustración -->
       <div class="hidden md:block">
         <div class="bg-white rounded-2xl shadow-xl p-8">
-          <img
-          :src="energy_image"
-            alt="Ilustración de energía renovable" class="w-full h-auto rounded-xl mb-6" />
+          <img :src="energy_image" alt="Ilustración de energía renovable" class="w-full h-auto rounded-xl mb-6" />
           <div class="space-y-4">
             <h3 class="text-2xl font-bold text-orange-800">Impacto del Consumo Energético</h3>
             <p class="text-gray-600">
@@ -144,9 +143,9 @@ const hvacHours = ref(0);
 const nextStep = () => {
   store.setEnergyData({
     applianceHours: applianceHours.value,
-    lightBulbs: lightBulbs.value,
     gasTanks: gasTanks.value,
     hvacHours: hvacHours.value,
+    lightBulbs: lightBulbs.value,
   });
   router.push("/Food");
 };
@@ -184,4 +183,3 @@ input[type="range"]::-webkit-slider-runnable-track {
   background: transparent;
 }
 </style>
-

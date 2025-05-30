@@ -91,7 +91,8 @@
             </button>
           </router-link>
           <router-link to="/food">
-            <button @click="nextStep" class="px-6 py-3 bg-yellow-300 text-white rounded-lg hover:bg-yellow-400 transition-colors">
+            <button @click="nextStep"
+              class="px-6 py-3 bg-yellow-300 text-white rounded-lg hover:bg-yellow-400 transition-colors">
               Siguiente
             </button>
           </router-link>
@@ -101,9 +102,8 @@
       <!-- Ilustración -->
       <div class="hidden md:block">
         <div class="bg-white rounded-2xl shadow-xl p-8">
-          <img
-            :src="transport_image"
-            alt="Ilustración de transporte eco-amigable" class="w-full h-auto rounded-xl mb-6" />
+          <img :src="transport_image" alt="Ilustración de transporte eco-amigable"
+            class="w-full h-auto rounded-xl mb-6" />
           <div class="space-y-4">
             <h3 class="text-2xl font-bold text-yellow-800">Impacto del Transporte</h3>
             <p class="text-gray-600">
@@ -144,9 +144,9 @@ const internationalFlights = ref(0)
 const nextStep = () => {
   store.setTransportData({
     carKm: carKm.value,
-    publicKm: publicKm.value,
     domesticFlights: domesticFlights.value,
     internationalFlights: internationalFlights.value,
+    publicKm: publicKm.value,
   });
   router.push("/Waste");
 };

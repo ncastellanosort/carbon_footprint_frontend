@@ -49,7 +49,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { Bar, Pie } from 'vue-chartjs'
 import {
   Chart as ChartJS,
@@ -62,7 +62,7 @@ import {
   LinearScale,
 } from 'chart.js'
 import ChartDataLabels from 'chartjs-plugin-datalabels'
-import { getfakedata } from './results_from_calculator.js'
+import { useSurveyStore } from '../../services/surveyStore.js'
 
 ChartJS.register(
   Title,
@@ -135,89 +135,117 @@ const pieOptions = {
   },
 }
 
-onMounted(async () => {
-  const data = await getfakedata()
-  if (data) {
-    const transport = scaleToHundreds(data.transport)
-    const food = scaleToHundreds(data.food)
-    const energy = scaleToHundreds(data.energy)
-    const waste = scaleToHundreds(data.waste)
+const surveyStore = useSurveyStore()
 
-    chartData.value = {
-      labels: ['Transporte', 'Alimentación', 'Consumo Energético', 'Residuos'],
-      datasets: [
-        {
-          label: 'Impacto (centenas)',
-          backgroundColor: ['#FAFDE0', '#FFEFEF', '#FFF8EB', '#EAF4FF'],
-          data: [
-            Object.values(transport).reduce((a, b) => a + b, 0),
-            Object.values(food).reduce((a, b) => a + b, 0),
-            Object.values(energy).reduce((a, b) => a + b, 0),
-            Object.values(waste).reduce((a, b) => a + b, 0),
-          ],
-        },
-      ],
-    }
+function updateChartsFromData(data) {
+  if (!data) return
 
-    const formatLabels = (keys, values) =>
-      keys.map((key, index) => `${key}: ${values[index]}`)
+  const transport = scaleToHundreds(data.transport)
+  const food = scaleToHundreds(data.food)
+  const energy = scaleToHundreds(data.energy)
+  const waste = scaleToHundreds(data.waste)
 
-    const transportKeys = ['Auto (km)', 'Transporte público (km)', 'Vuelos nacionales', 'Vuelos internacionales']
-    const foodKeys = ['Carne roja', 'Carne blanca', 'Lácteos', 'Vegetariano']
-    const energyKeys = ['Electrodomésticos', 'Bombillos', 'Tanques de gas', 'Climatización']
-    const wasteKeys = ['Bolsas de basura', 'Desperdicio de comida', 'Botellas plásticas', 'Paquetes de papel']
-
-    const transportValues = Object.values(transport)
-    const foodValues = Object.values(food)
-    const energyValues = Object.values(energy)
-    const wasteValues = Object.values(waste)
-
-    transportData.value = {
-      labels: formatLabels(transportKeys, transportValues),
-      datasets: [
-        {
-          label: 'Transporte',
-          data: transportValues,
-          backgroundColor: ['#FFCDD2', '#F8BBD0', '#E1BEE7', '#D1C4E9'],
-        },
-      ],
-    }
-
-    foodData.value = {
-      labels: formatLabels(foodKeys, foodValues),
-      datasets: [
-        {
-          label: 'Alimentación',
-          data: foodValues,
-          backgroundColor: ['#C8E6C9', '#DCEDC8', '#F0F4C3', '#FFF9C4'],
-        },
-      ],
-    }
-
-    energyData.value = {
-      labels: formatLabels(energyKeys, energyValues),
-      datasets: [
-        {
-          label: 'Energía',
-          data: energyValues,
-          backgroundColor: ['#B2EBF2', '#B2DFDB', '#C8E6C9', '#D7CCC8'],
-        },
-      ],
-    }
-
-    wasteData.value = {
-      labels: formatLabels(wasteKeys, wasteValues),
-      datasets: [
-        {
-          label: 'Residuos',
-          data: wasteValues,
-          backgroundColor: ['#FFECB3', '#FFE0B2', '#FFCCBC', '#D7CCC8'],
-        },
-      ],
-    }
+  chartData.value = {
+    labels: ['Transporte', 'Alimentación', 'Consumo Energético', 'Residuos'],
+    datasets: [
+      {
+        label: 'Impacto (centenas)',
+        backgroundColor: ['#FAFDE0', '#FFEFEF', '#FFF8EB', '#EAF4FF'],
+        data: [
+          Object.values(transport).reduce((a, b) => a + b, 0),
+          Object.values(food).reduce((a, b) => a + b, 0),
+          Object.values(energy).reduce((a, b) => a + b, 0),
+          Object.values(waste).reduce((a, b) => a + b, 0),
+        ],
+      },
+    ],
   }
+
+  const formatLabels = (keys, values) =>
+    keys.map((key, index) => `${key}: ${values[index]}`)
+
+  const transportKeys = [
+    'Auto (km)',
+    'Vuelos nacionales',
+    'Vuelos internacionales',
+    'Transporte público (km)',
+  ]
+  const foodKeys = ['Lácteos', 'Carne roja', 'Vegetariano', 'Carne blanca']
+  const energyKeys = [
+    'Electrodomésticos',
+    'Tanques de gas',
+    'Climatización',
+    'Bombillos',
+  ]
+  const wasteKeys = [
+    'Desperdicio de comida',
+    'Paquetes de papel',
+    'Botellas plásticas',
+    'Bolsas de basura',
+  ]
+
+  const transportValues = Object.values(transport)
+  const foodValues = Object.values(food)
+  const energyValues = Object.values(energy)
+  const wasteValues = Object.values(waste)
+
+  transportData.value = {
+    labels: formatLabels(transportKeys, transportValues),
+    datasets: [
+      {
+        label: 'Transporte',
+        data: transportValues,
+        backgroundColor: ['#FFCDD2', '#F8BBD0', '#E1BEE7', '#D1C4E9'],
+      },
+    ],
+  }
+
+  foodData.value = {
+    labels: formatLabels(foodKeys, foodValues),
+    datasets: [
+      {
+        label: 'Alimentación',
+        data: foodValues,
+        backgroundColor: ['#C8E6C9', '#DCEDC8', '#F0F4C3', '#FFF9C4'],
+      },
+    ],
+  }
+
+  energyData.value = {
+    labels: formatLabels(energyKeys, energyValues),
+    datasets: [
+      {
+        label: 'Energía',
+        data: energyValues,
+        backgroundColor: ['#B2EBF2', '#B2DFDB', '#C8E6C9', '#D7CCC8'],
+      },
+    ],
+  }
+
+  wasteData.value = {
+    labels: formatLabels(wasteKeys, wasteValues),
+    datasets: [
+      {
+        label: 'Residuos',
+        data: wasteValues,
+        backgroundColor: ['#FFECB3', '#FFE0B2', '#FFCCBC', '#D7CCC8'],
+      },
+    ],
+  }
+}
+
+onMounted(() => {
+  updateChartsFromData(surveyStore.forwardedResponse)
 })
+
+watch(
+  () => surveyStore.forwardedResponse,
+  (newVal) => {
+    updateChartsFromData(newVal)
+  }
+)
 </script>
+
 
 <style scoped>
 canvas {

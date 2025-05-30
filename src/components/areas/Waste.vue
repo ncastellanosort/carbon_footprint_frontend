@@ -93,7 +93,8 @@
             </button>
           </router-link>
           <router-link to="/result">
-            <button @click="sendData" class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+            <button @click="sendData"
+              class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
               Enviar Todo
             </button>
           </router-link>
@@ -103,9 +104,7 @@
       <!-- Ilustración -->
       <div class="hidden md:block">
         <div class="bg-white rounded-2xl shadow-xl p-8">
-          <img
-            :src="waste_image"
-            alt="Ilustración de gestión de residuos" class="w-full h-auto rounded-xl mb-6" />
+          <img :src="waste_image" alt="Ilustración de gestión de residuos" class="w-full h-auto rounded-xl mb-6" />
           <div class="space-y-4">
             <h3 class="text-2xl font-bold text-blue-800">Impacto de los Residuos</h3>
             <p class="text-gray-600">
@@ -143,10 +142,10 @@ const paperPackages = ref(0);
 
 const sendData = () => {
   store.setWasteData({
-    trashBags: trashBags.value,
     foodWaste: foodWaste.value,
+    paperPackages: paperPackages.value,
     plasticBottles: plasticBottles.value,
-    paperPackages: paperPackages.value
+    trashBags: trashBags.value,
   });
   store.sendAllData();
 };
@@ -184,4 +183,3 @@ input[type="range"]::-webkit-slider-runnable-track {
   background: transparent;
 }
 </style>
-
