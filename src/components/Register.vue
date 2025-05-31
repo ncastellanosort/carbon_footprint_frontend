@@ -3,7 +3,7 @@ import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
-import { register } from '@/services/authService.js'
+import { register } from '../services/authService.js'
 
 
 const router = useRouter()

@@ -12,11 +12,10 @@
             Por favor, espera un momento mientras procesamos la información. Si el proceso no continúa, vuelve a
             realizar la encuesta.
           </p>
-          <router-link to="/">
-            <button class="mt-6 px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors">
-              Ir a la encuesta
-            </button>
-          </router-link>
+          <button @click="irAlInicio"
+            class="mt-6 px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors">
+            Ir a la encuesta
+          </button>
         </div>
 
         <div v-else>
@@ -156,7 +155,7 @@
 
           <!-- Botón Volver -->
           <div class="p-8 bg-gray-50">
-            <button @click="volverAlInicio"
+            <button @click="irAlInicio"
               class="w-full py-4 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-lg font-medium">
               Volver al inicio
             </button>
@@ -181,6 +180,7 @@ import Navbar from '@/components/Navbar.vue'
 import NavbarAuth from './authenticated/NavbarAuth.vue'
 import Footer from '@/components/Footer.vue'
 import { useSurveyStore } from '../services/surveyStore.js'
+import { useRouter } from 'vue-router'
 
 const tieneToken = ref(false)
 const data = ref(null)
@@ -189,6 +189,7 @@ const recomendacionesSimples = ref([])
 const recomendacionGlobal = ref('')
 const huboError = ref(false)
 const surveyStore = useSurveyStore()
+const router = useRouter()
 
 const estaCargando = computed(() => !data.value || Object.keys(data.value).length === 0)
 
@@ -246,9 +247,16 @@ onMounted(() => {
   tieneToken.value = !!token
 })
 
-const volverAlInicio = () => {
+const irAlInicio = () => {
   localStorage.removeItem("forwarded_response")
   surveyStore.setForwardedResponse(null)
+
+  const token = localStorage.getItem('token')
+  if (token) {
+    router.push('/welcome-auth')
+  } else {
+    router.push('/')
+  }
 }
 
 const transformarColoresRGB = () => {
