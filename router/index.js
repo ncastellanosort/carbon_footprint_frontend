@@ -26,8 +26,8 @@ const routes = [
   { path: '/waste', component: Waste },
   { path: '/result', component: Result },
   { path: '/history', component: History },
-  { path: '/welcome-auth', component: WelcomeAuth, beforeEnter: authGuard},
-  { path: '/history/:id/detail', component:HistoryDetail}
+  { path: '/welcome-auth', component: WelcomeAuth, beforeEnter: authGuard },
+  { path: '/history/:id/detail', component: HistoryDetail }
 ];
 
 const router = createRouter({

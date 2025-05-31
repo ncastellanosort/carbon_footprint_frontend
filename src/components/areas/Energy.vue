@@ -1,5 +1,6 @@
 <template>
-  <Navbar />
+  <NavbarAuth v-if="tieneToken" />
+  <Navbar v-else />
   <div class="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-6">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
       <div class="bg-white rounded-2xl shadow-xl p-8">
@@ -125,12 +126,20 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useSurveyStore } from "@/services/surveyStore";
 import { useRouter } from "vue-router";
 import Navbar from '@/components/Navbar.vue'
+import NavbarAuth from '../authenticated/NavbarAuth.vue'
 import Footer from '@/components/Footer.vue'
 import energy_image from '@/assets/energy_image.jpg'
+
+const tieneToken = ref(false)
+
+onMounted(() => {
+  const token = localStorage.getItem('token')
+  tieneToken.value = !!token
+})
 
 const store = useSurveyStore();
 const router = useRouter();

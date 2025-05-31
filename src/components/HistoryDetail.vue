@@ -1,5 +1,5 @@
 <template>
-  <Navbar />
+  <NavbarAuth />
   <div class="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-6">
     <div class="max-w-7xl mx-auto">
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -98,7 +98,7 @@
           </div>
 
           <div class="p-8 bg-gray-50">
-            <router-link to="/historial">
+            <router-link to="/History">
               <button class="w-full py-4 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-lg font-medium">
                 Volver al Historial
               </button>
@@ -122,6 +122,7 @@ import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
 import result_image from '@/assets/result_image.jpg'
 import Chart_display_history from './results_display/chart_display_history.vue'
+import NavbarAuth from './authenticated/NavbarAuth.vue'
 
 const route = useRoute()
 const data = ref(null)

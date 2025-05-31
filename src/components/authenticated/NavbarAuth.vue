@@ -36,14 +36,14 @@ const logout = () => {
           <path d="M9 9h6" />
           <path d="M9 13h6" />
         </svg>
-        <router-link to="/">
+        <router-link to="/welcome-auth">
           <span class="text-xl font-bold text-green-800">EcoFootprint</span>
         </router-link>
       </div>
 
       <!-- Links Centrados -->
       <div class="flex space-x-6">
-        <router-link to="/" class="text-green-600 hover:text-green-800">Home</router-link>
+        <router-link to="/welcome-auth" class="text-green-600 hover:text-green-800">Home</router-link>
 
         <!-- Dropdown Huella de Carbono -->
         <div class="relative">

@@ -1,5 +1,6 @@
 <template>
-  <Navbar />
+  <NavbarAuth v-if="tieneToken" />
+  <Navbar v-else />
   <div class="min-h-screen bg-gradient-to-br from-red-50 to-rose-100 p-6">
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
       <!-- Formulario de Alimentación -->
@@ -128,12 +129,20 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useSurveyStore } from "@/services/surveyStore";
 import { useRouter } from "vue-router";
 import Navbar from '@/components/Navbar.vue'
+import NavbarAuth from '../authenticated/NavbarAuth.vue'
 import Footer from '@/components/Footer.vue'
 import food_image from '@/assets/food_image.jpg'
+
+const tieneToken = ref(false)
+
+onMounted(() => {
+  const token = localStorage.getItem('token')
+  tieneToken.value = !!token
+})
 
 const store = useSurveyStore();
 const router = useRouter();

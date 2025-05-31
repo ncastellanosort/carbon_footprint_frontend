@@ -275,11 +275,14 @@ const obtenerHistorial = () => {
     .get('/history')
     .then((res) => {
       historial.value = res.data
+      console.log('Historial obtenido:', historial.value)
     })
     .catch((err) => {
       console.error('Error obteniendo historial:', err)
     })
 }
+
+
 
 const closeModal = () => {
   showModal.value = false

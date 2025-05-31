@@ -1,5 +1,6 @@
 <template>
-  <Navbar />
+  <NavbarAuth v-if="tieneToken" />
+  <Navbar v-else />
   <div class="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-6">
     <div class="max-w-7xl mx-auto">
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -155,12 +156,10 @@
 
           <!-- Botón Volver -->
           <div class="p-8 bg-gray-50">
-            <router-link to="/">
-              <button @click="volverAlInicio"
-                class="w-full py-4 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-lg font-medium">
-                Volver al inicio
-              </button>
-            </router-link>
+            <button @click="volverAlInicio"
+              class="w-full py-4 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-lg font-medium">
+              Volver al inicio
+            </button>
             <p class="text-center text-gray-500 text-sm mt-4">
               Calcula tu huella de nuevo en unos meses para ver tu progreso
             </p>
@@ -173,15 +172,17 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { parse, formatRgb } from 'culori'
 import html2pdf from 'html2pdf.js'
 import ChartDisplay from './results_display/chart_display.vue'
 import result_image from '@/assets/result_image.jpg'
 import Navbar from '@/components/Navbar.vue'
+import NavbarAuth from './authenticated/NavbarAuth.vue'
 import Footer from '@/components/Footer.vue'
 import { useSurveyStore } from '../services/surveyStore.js'
 
+const tieneToken = ref(false)
 const data = ref(null)
 const huellaCarbono = ref(0)
 const recomendacionesSimples = ref([])
@@ -238,6 +239,11 @@ const interpretacionResultado = computed(() => {
   if (huellaCarbono.value < 8) return 'Impacto moderado. Puedes mejorar con pequeños cambios.'
   if (huellaCarbono.value < 12) return 'Impacto alto. Implementa recomendaciones para reducirlo.'
   return 'Impacto muy alto. Necesitas hacer cambios importantes.'
+})
+
+onMounted(() => {
+  const token = localStorage.getItem('token')
+  tieneToken.value = !!token
 })
 
 const volverAlInicio = () => {
